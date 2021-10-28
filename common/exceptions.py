@@ -1,0 +1,2 @@
+class XPubNotRegisteredError(ValueError):
+    pass

@@ -1,0 +1,55 @@
+{
+    "hash": "c0c29ac4e925592e19cfbe56d1113baa8dbb112b9df4f75fe80ebeeacef89d1f",
+    "confirmations": 37391,
+    "size": 2664,
+    "height": 2395206,
+    "version": 6422787,
+    "merkleroot": "fbc56f29e23a3ca9016cc249cd6158ccb0ba92ddc090c15ffc0e582f152a8fea",
+    "tx": ["63d724aa73c26a46103f0a3aa8940c72e0537bdd0de500d032e437b5f0fb60c7", "a12d5ea49c800f9776333e2b98f5a712315d82a2a1dd46a0fda0c44eff0d3c2f", "0a8de8f00c651a49d6af6d5b91e5c24eef4758f8ab85649ea5f77935d7daaf2a", "39d14b47ae01f6ef8e974e86ba70eefd9ade00ec6f22978592a419cf11ab6a2f", "4a0c312e0f58c938db9d65b2a960f7c4c007787d0dcaefdc09b0db4bf9bd9064", "91a041414bbbb81054c9ecf99db48e62836726f555c2dbe92b20441163f3f69c", "9bebea10146ba70c7b24ef1ba6ca3e8e529ec6222dfaaf6297673fb53c31eee1", "2842aac30605e5e007ae911c257bbdc9c61c8458bf976b9cda7c85b1aec1226c"],
+    "time": 1537294133,
+    "nonce": 0,
+    "bits": "1a05e245",
+    "difficulty": 2851350.0876804,
+    "chainwork": "0000000000000000000000000000000000000000000000f8ccd8fc565b6b6b7d",
+    "auxpow": {
+        "tx": {
+            "hex": "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff4c030acd16043b3fa15b08fabe6d6dc0c29ac4e925592e19cfbe56d1113baa8dbb112b9df4f75fe80ebeeacef89d1f010000000000000041500ac138ad19000d2f6e6f64655374726174756d2f00000000020000000000000000266a24aa21a9edb57a30721b4bf190087e6f073ae7373b6b0b26a68a138addd87ba06ae179c6a19c171095000000001976a9144e5b6ac50ba9cfa8decba101610a51a261efec8888ac00000000",
+            "txid": "9932dab72eb9f1fda71e9a73a89a1e50538da28a45fa5fc645766106c9d2b6a5",
+            "version": 1,
+            "locktime": 0,
+            "vin": [{
+                "coinbase": "030acd16043b3fa15b08fabe6d6dc0c29ac4e925592e19cfbe56d1113baa8dbb112b9df4f75fe80ebeeacef89d1f010000000000000041500ac138ad19000d2f6e6f64655374726174756d2f",
+                "sequence": 0
+            }],
+            "vout": [{
+                "value": 0,
+                "n": 0,
+                "scriptPubKey": {
+                    "asm": "OP_RETURN aa21a9edb57a30721b4bf190087e6f073ae7373b6b0b26a68a138addd87ba06ae179c6a1",
+                    "hex": "6a24aa21a9edb57a30721b4bf190087e6f073ae7373b6b0b26a68a138addd87ba06ae179c6a1",
+                    "type": "nulldata"
+                }
+            }, {
+                "value": 25.00859804,
+                "n": 1,
+                "scriptPubKey": {
+                    "asm": "OP_DUP OP_HASH160 4e5b6ac50ba9cfa8decba101610a51a261efec88 OP_EQUALVERIFY OP_CHECKSIG",
+                    "hex": "76a9144e5b6ac50ba9cfa8decba101610a51a261efec8888ac",
+                    "reqSigs": 1,
+                    "type": "pubkeyhash",
+                    "addresses": ["DCHQkzQQTHFeSBJ28fKPpsJuNV2PfxK8yr"]
+                }
+            }],
+            "blockhash": "397fe4384753804bec9411bd7d72d0afc9ff6f7ca0e40ac2e759669b3631ae35"
+        },
+        "index": 0,
+        "chainindex": 0,
+        "merklebranch": ["78be8f50411af6e22c2afad60022c4a7caa5ad80b619ee6c35f2a7acc5aea0f4", "d21bc29f6c5d860e996f8f4825214072badf25e7e305f699d5f8517089b30fad", "c7e2bffeff2aa75f91bbc341b6ef3d9adf6307c3b63c71a0ab7a37bc247eebf3", "3b508fe11d39aed6f0e0d2d76c65ebae69b1633f976241e55c53a9a4e2298143", "3d23e658ee35c6dbcd5fc3914b546b2866d9afe8bc6f4024a2f0e827739e2f8f"],
+        "chainmerklebranch": [],
+        "parentblock": "00000020316d259b8126a36e97ffe311a57ae81c86746bd43ebc60f8882d03d528b03dd1c0f64147f6966aeb6d2dbddf2cac6ca8b2171b7230c884060c08623acc54bcb33b3fa15bdeed011a18548f50"
+    },
+    "previousblockhash": "68658ff42cf64d14c9bbf90eaf91aaca7fce988ddfbded8c132278e73766c759",
+    "nextblockhash": "c791f14911c946b751ba348b2a14bd44f061eccfdfdc727cd0d0b1360ae40e1b",
+    "reward": 0.02441406,
+    "isMainChain": true
+}

@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  e2e:
+    build: '.'
+    environment:
+      WATCHTOWER_URL: localhost:8000/api/v1
+    command: /init.sh
+    network_mode: host
+    volumes:
+      - ./init.sh:/init.sh
+      - ./__tests__:/__tests__

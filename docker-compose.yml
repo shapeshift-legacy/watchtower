@@ -1,0 +1,113 @@
+version: "3"
+
+services:
+  postgres:
+    image: postgres:9
+    container_name: wt-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: watchtower
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+  redis:
+    image: redis:alpine
+    container_name: wt-redis
+    ports:
+      - 6380:6379
+  rabbit:
+    image: rabbitmq:3-management
+    container_name: wt-rabbitmq
+    ports:
+      - 15672:15672
+      - 5672:5672
+  watchtower:
+    build:
+      context: .
+    container_name: watchtower
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - postgres
+      - redis
+      - rabbit
+    volumes:
+      - .:/watchtower
+    ports:
+      - "8000:8000"
+    command: dockerize -wait tcp://postgres:5432 -wait tcp://redis:6379 -wait tcp://rabbit:5672 -timeout 10m sh -c "python manage.py makemigrations && python manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    # command: dockerize -wait tcp://postgres:5432 -wait tcp://redis:6379 -wait tcp://rabbit:5672 -timeout 10m sh -c "python manage.py makemigrations && python manage.py migrate && gunicorn -c config/gunicorn.local.py watchtower.wsgi:application"
+  scheduler:
+    build:
+      context: .
+    container_name: scheduler
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - watchtower
+    volumes:
+      - .:/watchtower
+    command: dockerize -wait http://watchtower:8000 -timeout 10m sh -c "rm -f celerybeat.pid && celery -A watchtower beat -l info --scheduler django_celery_beat.schedulers:DatabaseScheduler"
+  workers:
+    build:
+      context: .
+    container_name: workers
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - watchtower
+    volumes:
+      - .:/watchtower
+    command: dockerize -wait http://watchtower:8000 -timeout 1m celery -A watchtower worker --concurrency=9 -l info -O fair
+  flower:
+    build:
+      context: .
+    command: dockerize -wait http://watchtower:8000 -timeout 1m celery -A watchtower flower --port=5555 --persistent=True --db=flower --broker=redis://redis:6379/0 --broker_api=redis://redis:6379/0
+    container_name: wt-flower
+    ports:
+      - 5555:5555
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - watchtower
+    volumes:
+      - .:/watchtower
+      
+  unchained:
+    build:
+      context: .
+    container_name: unchained
+    environment:
+      PYTHONDONTWRITEBYTECODE: 1
+      PYTHONUNBUFFERED: 1
+    depends_on:
+      - rabbit
+      - watchtower
+      - postgres
+    volumes:
+      - .:/watchtower
+    command: dockerize -wait tcp://postgres:5432 -wait tcp://redis:6379 -wait tcp://rabbit:5672 -timeout 1m sh -c "python manage.py ingest_unchained_events"
+
+  # # Unless working on BNB you dont need this
+  # websocket:
+  #   build:
+  #     context: .
+  #   container_name: ws-bnb
+  #   environment:
+  #     PYTHONDONTWRITEBYTECODE: 1
+  #     PYTHONUNBUFFERED: 1
+  #   depends_on:
+  #     - workers
+  #   volumes:
+  #     - .:/watchtower
+  #   command: dockerize -wait tcp://postgres:5432 -wait tcp://redis:6379 -wait tcp://rabbit:5672 -timeout 1m sh -c "python manage.py bnb_queue_blocks"
+
+volumes:
+  postgres-data:

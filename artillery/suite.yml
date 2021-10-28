@@ -1,0 +1,258 @@
+config:
+  target: 'http://localhost:8000/api/v1'
+  variables:
+    interval:
+      - "daily"
+      - "weekly"
+      - "hourly"
+      - "minutely"
+      - "30min"
+      - "15min"
+      - "10min"
+      - "5min"
+      - "1min"
+  phases:
+    - duration: 10
+      arrivalRate: 5
+    - duration: 10
+      arrivalRate: 10
+    - duration: 10
+      arrivalRate: 20
+    - duration: 10
+      arrivalRate: 40
+    - duration: 600
+      arrivalRate: 50
+  defaults:
+    headers:
+      Accept: 'application/json'
+  environments:
+    staging:
+      target: 'https://watchtower.staging.redacted.example.com/api/v1'
+  payload:
+    - path: "./xpubs.csv"
+      fields:
+        - "network"
+        - "xpub"
+        - "script_type"
+        - "account_path"
+        - "account_number"
+scenarios:
+  - name: "XPub Status"
+    weight: 1000
+    flow:
+      - post:
+          url: "/xpubs"
+          json:
+            xpub: "{{ xpub }}"
+            network: "{{ network }}"
+            script_type: "{{ script_type }}"
+  - name: "Transaction History"
+    weight: 1000
+    flow:
+      - post:
+          url: "/transactions"
+          json:
+            data:
+              - xpub: "{{ xpub }}"
+                network: "{{ network }}"
+                script_type: "{{ script_type }}"
+  - name: "Receive Address"
+    weight: 100
+    flow:
+      - post:
+          url: "/receive"
+          json:
+            xpub: "{{ xpub }}"
+            network: "{{ network }}"
+            script_type: "{{ script_type }}"
+  - name: "Balance History"
+    weight: 1000
+    flow:
+      - post:
+          url: "/balance/multihistory?interval={{ interval }}"
+          json:
+            data:
+              - xpub: "{{ xpub }}"
+                network: "{{ network }}"
+                script_type: "{{ script_type }}"
+  - name: "Balances"
+    weight: 1000
+    flow:
+      - post:
+          url: "/balance"
+          json:
+            data:
+              - xpub: "{{ xpub }}"
+                network: "{{ network }}"
+                script_type: "{{ script_type }}"
+                account_path: "{{ account_path }}"
+                account_number: {{ account_number }}
+  - name: "Balances for Multiple XPubs"
+    weight: 1000
+    flow:
+      - post:
+          url: "/balance"
+          json:
+            data:
+              - xpub: "xpub6DQYbVJSVvJPzpYenir7zVSf2WPZRu69LxZuMezzAKuT6biPcug6Vw1zMk4knPBeNKvioutc4EGpPQ8cZiWtjcXYvJ6wPiwcGmCkihA9Jy3"
+                network: "BTC"
+                script_type: "p2pkh"
+                account_path: "m/44'/0'/0'"
+                account_number: 0
+              - xpub: "xpub6C6tu94F7FQDaMjp5Sj2ukjr2DtnbFJne9yVjhfMvBJQajXZfNgqPXTG8tnDEmqdn586RhvbfBz9wraLfPFwsREgf75FaSfKa6Dt9ymRYkR"
+                network: "BTC"
+                script_type: "p2sh-p2wpkh"
+                account_path: "m/49'/0'/0'"
+                account_number: 0
+              - xpub: "xpub6ByQVfUXLqoVjL1N5HW8CctsAe3U9Z4DyDeyhVMXhcCmXNa1PnAx9utb8TC7RshB65tHCF8CV6XH4QmQ5c9r5k39fmcaLRPqgGaELBK6o7G"
+                network: "BCH"
+                script_type: "p2pkh"
+                account_path: "m/44'/145'/0'"
+                account_number: 0
+              - xpub: "xpub6CREgkL1sy1E4Kpk9ZFZVHWR8pMpAe7Keo3vVgyscXQoVnJuL4tgpnvJKJyUgLK6qVUPPGiD1M6bcdKcktAvLBDSkc1p35TtYP3UAuv1QsS"
+                network: "DOGE"
+                script_type: "p2pkh"
+                account_path: "m/44'/3'/0'"
+                account_number: 0
+              - xpub: "xpub6CULQC6LFKXH3CQ6hmVTsov2zbkqh6NsoyvL7WgcbbTC4JkYH9uG3WT5XGox8YFvhnswmWZXqdvxsMvLNnMARTiGRRAtBBwrLbYMiG8TgLx"
+                network: "LTC"
+                script_type: "p2pkh"
+                account_path: "m/44'/2'/0'"
+                account_number: 0
+              - xpub: "xpub6BxxBhEzmiwSxn3LstHhx2E231krUACw2bxKA4AiBPaw6tb5aobCxwG2nURczATD4wEk8BwKqKX46rcVbLnYqwVgaqz7buq1KWDzajL2V3y"
+                network: "DASH"
+                script_type: "p2pkh"
+                account_path: "m/44'/5'/0'"
+                account_number: 0
+              - xpub: "xpub6CiK2mKmvcYbHPqJcfirvVNiw2wd5xuQ2WzYZXwkd9Lxqse55CixNKKomMdVWm9YihNrdTR6M86WCfDTYcXB4MsNGsaETt8Ay95Ts8HGkZh"
+                network: "DGB"
+                script_type: "p2pkh"
+                account_path: "m/44'/20'/0'"
+                account_number: 0
+              - xpub: "xpub6C136JfwYn6xabZ95zk2fu53JczP2tEeeBXhnNwD95YCstNksXtyrKhCcgVpouJzMsuWGggv3aVg2TgwtAvZD7bR27qECa2si8RzRNkN9yE"
+                network: "ETH"
+                script_type: "eth"
+                account_path: "m/44'/60'/0'"
+                account_number: 0
+            supportedTokens:
+              GNT: "0xa74476443119a942de498590fe1f2454d7d4ac0d"
+              GNO: "0x6810e776880c02933d47db1b9fc05908e5386b96"
+              FOX: "0xc770eefad204b5180df6a14ee197d99d808ee52d"
+              SNGLS: "0xaec2e87e0a235266d9c5adc9deb4b2e29b54d009"
+              ICN: "0x888666ca69e0f178ded6d75b5726cee99a87d698"
+              DGD: "0xe0b7927c4af23765cb51314a0e0521a9645f0e2a"
+              MLN: "0xec67005c4e498ec7f55e092bd1d35cbc47c91892"
+              REP: "0x1985365e9f78359a9b6ad760e32412f4a445e862"
+              SWT: "0xb9e7f8568e08d5659f5d29c4997173d84cdf2607"
+              WINGS: "0x667088b212ce3d06a1b553a7221e1fd19000d9af"
+              TRST: "0xcb94be6f13a1182e4a4b6140cb7bf2025d28e41b"
+              RLC: "0x607f4c5bb672230e8672085532f7e901544a7375"
+              ANT: "0x960b236a07cf122663c4303350609a66a7b288c0"
+              BAT: "0x0d8775f648430679a709e98d2b0cb6250d2887ef"
+              BNT: "0x1f573d6fb3f13d689ff844b4ce37794d79a7ff1c"
+              SNT: "0x744d70fdbe2ba4cf95131626614a1763df805b9e"
+              NMR: "0x1776e1f26f98b1a5df9cd347953a26dd3cb46671"
+              EDG: "0x08711d3b02c8758f2fb3ab4e80228418a7f8e39c"
+              CVC: "0x41e5560054824ea6b0732e656e3ad64e20e94e45"
+              MTL: "0xf433089366899d83a9f26a773d59ec7ecf30355e"
+              PAY: "0xb97048628db6b661d4c2aa833e95dbe1a905b280"
+              FUN: "0x419d0d8bdd9af5e606ae2232ed285aff190e711b"
+              DNT: "0x0abdace70d3790235af448c88547603b945604ea"
+              ZRX: "0xe41d2489571d322189246dafa5ebde1f4699f498"
+              1ST: "0xaf30d2a7e90d7dc361c8c4585e9bb7d2f6f15bc7"
+              OMG: "0xd26114cd6ee289accf82350c8d8487fedb8a0c07"
+              SALT: "0x4156d3342d5c385a87d264f90653733592000581"
+              RCN: "0xf970b8e36e23f7fc3fd752eea86f8be8d83375a6"
+              STORJ: "0xb64ef51c888972c908cfacf59b47c1afbc0ab8ac"
+              BNB: "0xb8c77482e45f1f44de1745f52c74426c631bdd52"
+              USDT: "0xdac17f958d2ee523a2206206994597c13d831ec7"
+              POLY: "0x9992ec3cf6a55b00978cddf2b27bc6882d88d1ec"
+              ZIL: "0x05f4a42e251f2d52b8ed15e9fedaacfcef1fad27"
+              MANA: "0x0f5d2fb29fb7d3cfee444a200298f468908cc942"
+              GTO: "0xc5bbae50781be1669306b9e001eff57a2957b09d"
+              IOST: "0xfa1a856cfa3409cfa145fa4e20eb270df3eb21ab"
+              ELF: "0xbf2179859fc6d5bee9bf9158632dc51678a4100e"
+              TUSD: "0x0000000000085d4780b73119b644ae5ecd22b376"
+              AE: "0x5ca9a71b1d01849c0a95490cc00559717fcf0d1d"
+              MKR: "0x9f8f72aa9304c8b593d555f12ef6589cc3a579a2"
+              DAI: "0x89d24a6b4ccb1b6faa2625fe562bdd9a23260359"
+              SPANK: "0x42d6622dece394b54999fbd73d108123806f6a18"
+              MCO: "0xb63b606ac810a52cca15e44bb630fd42d8d1d83d"
+              PPT: "0xd4fa1460f537bb9085d22c7bccb5dd450ef28e3a"
+  - name: "Create BTC Tx"
+    weight: 1
+    flow:
+      - post:
+          url: "/tools/create_unsigned_transaction"
+          json:
+            network: "BTC"
+            inputs:
+              - xpub: "xpub6BxmBCuzf3H3PF2NHed8LLNsVaq6Xu4EVSTmpS7H2pV4GV7R62T9V59AoPyHVgnWtNnFENJo2hu4P71PmSTa1fQLDxd3VzEgURBwwXeV61r"
+                script_type: "p2pkh"
+                account_address_n:
+                  - 2147483692
+                  - 2147483648
+                  - 2147483648
+            recipients:
+              - script_type: "p2pkh"
+                address: "1H6mNFnDdL9EutidY4yFUDzBsp2H1YfXGr"
+                amount: 2000
+            include_txs: true
+  - name: "Create LTC Tx"
+    weight: 1
+    flow:
+      - post:
+          url: "/tools/create_unsigned_transaction"
+          json:
+            network: "LTC"
+            inputs:
+              - xpub: "xpub6CULQC6LFKXH3CQ6hmVTsov2zbkqh6NsoyvL7WgcbbTC4JkYH9uG3WT5XGox8YFvhnswmWZXqdvxsMvLNnMARTiGRRAtBBwrLbYMiG8TgLx"
+                script_type: "p2pkh"
+                account_address_n:
+                  - 2147483692
+                  - 2147483650
+                  - 2147483648
+            recipients:
+              - script_type: "p2pkh"
+                address: "LgMKXabCpun7SnyQ6ASPQtHrzuEcBnVNEJ"
+                amount: 2000
+            include_txs: true
+  - name: "Create ETH Tx"
+    weight: 1
+    flow:
+      - post:
+          url: "/tools/create_unsigned_transaction"
+          json:
+            network: "ETH"
+            inputs:
+              - xpub: "xpub6BxQxcBPZ4axBRetAPWJYvMU5zhqHaotpiiafiLa6iX2iNxDdqEU1DdESxzjKr41Z2pJ65Q3GJJHW1EYu5c9yUbfqLtPgmVgvjLX34dTApm"
+                script_type: "eth"
+                account_address_n:
+                  - 2147483692
+                  - 2147483708
+                  - 2147483648
+            recipients:
+              - script_type: "eth"
+                address: "0x75E68d3b6acd23E79E395FA627Ae5CaE605C03d3"
+                amount: 2000
+            include_txs: true
+  - name: "Create ERC-20 Tx"
+    weight: 1
+    flow:
+      - post:
+          url: "/tools/create_unsigned_transaction"
+          json:
+            network: "ETH"
+            inputs:
+              - xpub: "xpub6BxQxcBPZ4axBRetAPWJYvMU5zhqHaotpiiafiLa6iX2iNxDdqEU1DdESxzjKr41Z2pJ65Q3GJJHW1EYu5c9yUbfqLtPgmVgvjLX34dTApm"
+                script_type: "eth"
+                account_address_n:
+                  - 2147483692
+                  - 2147483708
+                  - 2147483648
+                token: "BAT"
+            recipients:
+              - script_type: "eth"
+                address: "0x75E68d3b6acd23E79E395FA627Ae5CaE605C03d3"
+                amount: 0.5
+            include_txs: true

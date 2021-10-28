@@ -1,0 +1,12 @@
+{
+    "network": "FIO",
+    "rawtx": {
+        "signatures": [
+            "SIG_K1_KVrYy6PzWz93gc6DnuJoYSe6kqMvaGDqewa6PehqLRjyh5A46KtBKbHhaghPhv6NrVCKudd16HGG41a8XZLumckCfJeC71"
+        ],
+        "compression": 0,
+        "packed_context_free_data": "",
+        "packed_trx":
+            "42c26a5f053a9b154f8c00000000010000980ad20ca85be0e1d195ba85e7cd01800862a60c8fee2c00000000a8ed32324f3546494f355645364467793946556d64316d466f745877463838486b514e314b797343574c507170566e444d6a52764752693159724d00ca9a3b0000000000c2eb0b00000000800862a60c8fee2c0000"
+    }
+}

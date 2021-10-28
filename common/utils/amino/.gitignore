@@ -1,0 +1,6 @@
+# committing `amino-decoder` the binary adds ~20mb to repo
+# but keeps build process far simpler
+# built on mac with
+# env GOOS=linux GOARCH=amd64 go build
+
+# amino-decoder

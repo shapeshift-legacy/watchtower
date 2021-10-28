@@ -1,0 +1,3 @@
+from .unchained_event_ingester import UnchainedEventIngester
+
+unchained_event_ingester = UnchainedEventIngester()

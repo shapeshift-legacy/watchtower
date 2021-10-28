@@ -1,0 +1,59 @@
+{
+    "hash": "68658ff42cf64d14c9bbf90eaf91aaca7fce988ddfbded8c132278e73766c759",
+    "confirmations": 37390,
+    "size": 2623,
+    "height": 2395205,
+    "version": 6422787,
+    "merkleroot": "b3e658a500c18e4dc53b9b7f0215577a4c0ba7da92fa0c41ef457f7a232a47df",
+    "tx": ["a90289ea5dd54c696adbdd8df69775dc87ef076807f5f6ac66ceb11305987ae8", "a8326987c8fed69eafbbca7e83a4f27721e3074ac4011a8265d45bfc03c659e3", "2c87740d59e39fc2f796ae767437febcc757efb8a967f755390023eb2dd009d0", "9a8071fa4deba7f0792f438765fe8358243038c6949bec529650eb5d6beebcee", "589f256b53d9bd99fa69a91e74945536f1f2ddc0e78ecdc9cf4631b8ae70ee9a", "07633a045a8e6a8e3975c936b0f195ed7090898dbe67d3087114edb07b850051", "1b6dbc4582cf2c5cd5d64ff8966b70ec4345d7662c6b796114a010efa84e2fcc", "63737d8e48b2199b20eb442964d0ef7878c3c07d5ace2d88b2d32fa8341fdb9e"],
+    "time": 1537294104,
+    "nonce": 0,
+    "bits": "1a06318c",
+    "difficulty": 2708782.58329638,
+    "chainwork": "0000000000000000000000000000000000000000000000f8ccad7a14c2b799ce",
+    "auxpow": {
+        "tx": {
+            "hex": "01000000010000000000000000000000000000000000000000000000000000000000000000ffffffff640309cd162cfabe6d6d765b9efc8fdabafebe4589ab96a2a2fb84ffffba55a7cc077bfbe0cb630809c908000000f09f9886104d696e65642062792079686b6a383838000000000000000000000000000000000000000000000000000000000000000000000d0000000280b14d95000000001976a914aa3750aa18b8a0f3f0590731e1fab934856680cf88ac00000000000000002f6a24aa21a9eda3db22e0d1a298469ed02b4fdc3b8bba2803a494ff0c49c14092ba171b4cc7fb080000000000000000da183c3e",
+            "txid": "3aca213f534b72a037b9f4e8eb2c2c8af956284a2dfb2d9a3ee7677a57926308",
+            "version": 1,
+            "locktime": 1044125914,
+            "vin": [{
+                "coinbase": "0309cd162cfabe6d6d765b9efc8fdabafebe4589ab96a2a2fb84ffffba55a7cc077bfbe0cb630809c908000000f09f9886104d696e65642062792079686b6a38383800000000000000000000000000000000000000000000000000000000000000000000",
+                "sequence": 13
+            }],
+            "vout": [{
+                "value": 25.04896896,
+                "n": 0,
+                "scriptPubKey": {
+                    "asm": "OP_DUP OP_HASH160 aa3750aa18b8a0f3f0590731e1fab934856680cf OP_EQUALVERIFY OP_CHECKSIG",
+                    "hex": "76a914aa3750aa18b8a0f3f0590731e1fab934856680cf88ac",
+                    "reqSigs": 1,
+                    "type": "pubkeyhash",
+                    "addresses": ["DLf7gEHNnvpEex3fCz8oipXPDQnmdFTPmH"]
+                }
+            }, {
+                "value": 0,
+                "n": 1,
+                "scriptPubKey": {
+                    "asm": "OP_RETURN aa21a9eda3db22e0d1a298469ed02b4fdc3b8bba2803a494ff0c49c14092ba171b4cc7fb 0000000000000000",
+                    "hex": "6a24aa21a9eda3db22e0d1a298469ed02b4fdc3b8bba2803a494ff0c49c14092ba171b4cc7fb080000000000000000",
+                    "type": "nonstandard"
+                }
+            }],
+            "blockhash": "d13db028d5032d88f860bc3ed46b74861ce87aa511e3ff976ea326819b256d31"
+        },
+        "index": 0,
+        "chainindex": 0,
+        "merklebranch": ["3b1d46fb789f30277308e5e9e6ea3b97b66e7f9b5ed7e2bb1399bc970dc10211", "111eebf859b9dae551f3ccb8f47685460aa60b6a72428e876e0a9f1b43f1e967", "be6cb1bc54bf9337dfec3b150dc504fdbb393d197065d669d96994c7d7c98ddc", "e3c7523282c9653bbe9e20bc533ac97d5fe946df4ab7982b5ea605efcb6a8f61", "923a551f432e81db67842169686b3d0b9f44257eeeca137835279757088f80ee", "4029c605a753200aef81eabfefed832cf0051e075b71325450b134580702a910", "5e3837be9d2ed76d419a5d7c4ff4882f4c297ff5926ffa31fa3d6149147cbff9"],
+        "chainmerklebranch": ["0000000000000000000000000000000000000000000000000000000000000001", "d1bb34ce429d1eb5e6fc9bc739dab9963e8bf34e757f216a33191eabf37ed14b", "e4f3f20964a35ff27662851d5b34c6ee536f1416dc637997795dbaca6986b412"],
+        "parentblock": "00000020ab5e7be523e143074102fb5950bce89955f39638a9c2a194fa28fcb93aa266e98869dfa95f349128ae2028f7c77c25752d37a5c01e46f52d68bbd74faf60a0ae193fa15bdeed011aab900bb3"
+    },
+    "previousblockhash": "e87029d56438262885f5b397fe76e683609e0fd844944fdec9a9979d0939b318",
+    "nextblockhash": "c0c29ac4e925592e19cfbe56d1113baa8dbb112b9df4f75fe80ebeeacef89d1f",
+    "reward": 0.02441406,
+    "isMainChain": true,
+    "poolInfo": {
+        "poolName": "Discus Fish",
+        "url": "http://f2pool.com/"
+    }
+}

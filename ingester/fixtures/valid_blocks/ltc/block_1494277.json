@@ -1,0 +1,22 @@
+{
+    "hash": "5daad59e597741e5ffa734fd514f0fff09e0f6a96211db6b60664e0ab7909f8d",
+    "size": 251,
+    "height": 1494277,
+    "version": 536870912,
+    "merkleroot": "de566f31efda9ab2d9329ef2c34c7ba9fde87d30ae586fc2e1e0acfd4e279f5e",
+    "tx": ["de566f31efda9ab2d9329ef2c34c7ba9fde87d30ae586fc2e1e0acfd4e279f5e"],
+    "time": 1537293557,
+    "nonce": 3289945540,
+    "bits": "1a01edde",
+    "difficulty": 8696471.17424661,
+    "chainwork": "000000000000000000000000000000000000000000000135faace63a2297497a",
+    "confirmations": 15627,
+    "previousblockhash": "387d673b1d282dea77cf84efc16adf701d1fe5f1d4519ea60a7b2fa67576925c",
+    "nextblockhash": "64d345d347125ad72f8b251c831de76ec56a509b8e948e2f6756c15fac7b9f4e",
+    "reward": 25,
+    "isMainChain": true,
+    "poolInfo": {
+        "poolName": "AntMiner",
+        "url": "https://bitmaintech.com/"
+    }
+}
